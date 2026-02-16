@@ -11,7 +11,9 @@ connectToMongo();   ///Calls your DB function || DB connects when server starts 
 
 
 // middleware
-app.use(cors());    /// allow requests from frontend
+app.use(cors({
+    origin: "https://your-frontend.vercel.app"
+}));    /// allow requests from frontend
 app.use(express.json());    //read JSON body from requests
 
 
