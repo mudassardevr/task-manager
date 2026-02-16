@@ -52,13 +52,14 @@ router.put("/update/:id", fetchUser, async (req, res) => {
       return res.status(401).send("Not Allowed");
     }
 
-    const updates = {}
+    const updates = {};
     if(title !== undefined) updates.title = title;
     if(completed !== undefined) updates.completed = completed;
 
     task = await Task.findByIdAndUpdate(
       req.params.id,
-      { title, completed },
+      // { title, completed },
+      updates,
       { new: true },
     );
 
@@ -79,7 +80,7 @@ router.delete("/delete/:id", fetchUser, async (req, res) => {
     }
 
     await Task.findByIdAndDelete(req.params.id);
-    res.json({ succes: true , message:"Task deleted"});
+    res.json({ success: true , message:"Task deleted"});
   } catch (error) {
     res.status(500).send("Server Error");
   }

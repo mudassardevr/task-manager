@@ -1,6 +1,6 @@
 const express = require("express");
 const User = require("../models/User");
-const brcypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fetchUser = require("../middleware/fetchUser")
 
@@ -12,7 +12,6 @@ const router = express.Router();
 
 
 const JWT_SECRET = process.env.JWT_SECRET;
-console.log("JWT_SECRET" , JWT_SECRET);
 
 
 //Router 1: Register/ create user  with Post :no login required
@@ -38,8 +37,8 @@ router.post("/register", [
     }
 
     //hash password
-    const salt = await brcypt.genSalt(10);
-    const hashpassword = await brcypt.hash(password, salt);
+    const salt = await bcrypt.genSalt(10);
+    const hashpassword = await bcrypt.hash(password, salt);
 
     // create user
     user = await User.create({
@@ -85,7 +84,7 @@ router.post("/login", [
       return res.status(400).json({ error: "Invalid credentails " });
     }
 
-    const passwordCompare = await brcypt.compare(password, user.password);
+    const passwordCompare = await bcrypt.compare(password, user.password);
     if (!passwordCompare) {
       return res.status(400).json({ error: "Invalid credentails" });
     }
@@ -96,7 +95,7 @@ router.post("/login", [
       },
     };
 
-    const token = jwt.sign(data, JWT_SECRET);
+    const token = jwt.sign(data, JWT_SECRET, {expiresIn : "7d"});
     res.json({ token });
   } catch (error) {
     res.status(500).send("server erros");

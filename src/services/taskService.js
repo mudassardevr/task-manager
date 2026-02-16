@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:5000/api/tasks";
+// "http://localhost:5000/api/tasks";
+const API_URL = "https://task-manager-backend.onrender.com/api/tasks";
 
 const getToken = () => localStorage.getItem("token");
 
