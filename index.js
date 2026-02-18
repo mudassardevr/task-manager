@@ -10,10 +10,18 @@ const port =  process.env.PORT || 5000;
 connectToMongo();   ///Calls your DB function || DB connects when server starts || correct position
 
 
-// middleware
 app.use(cors({
-    origin: "https://mudassardevr.github.io"
-}));    /// allow requests from frontend
+  origin: [
+    "http://localhost:5173",           // Local Dev 💻
+    "https://mudassardevr.github.io"   // Production 🌍
+  ]
+}));
+
+// // middleware
+// app.use(cors({
+//     origin: "https://mudassardevr.github.io"
+// }));    /// allow requests from frontend
+
 app.use(express.json());    //read JSON body from requests
 
 
