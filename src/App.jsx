@@ -7,12 +7,13 @@ import Navbar from "./components/UI/Navbar";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { Toaster } from "react-hot-toast"; // this is toasts
 
 function App() {
   return (
     <>
+    <Toaster position="top-right" reverseOrder={false}/>
       <Navbar />
-     
         <Routes>
           <Route
             path="/"

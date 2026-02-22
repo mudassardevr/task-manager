@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { registerAPI } from "../services/authService";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast"; // toast
 
 function Register() {
   const navigate = useNavigate();
@@ -27,9 +28,10 @@ function Register() {
     try {
       const data = await registerAPI(credentails);
       localStorage.setItem("token", data.token);
+      toast.success("Created Account successfully"); // toast success
       navigate("/login");
     } catch (error) {
-      alert(error.message);
+     toast.error(error.message); // toast error
     }
 
     setLoading(false); // STOP spinner

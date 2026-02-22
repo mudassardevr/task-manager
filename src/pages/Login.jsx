@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { loginAPI } from "../services/authService";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast"; // toast notification
 
 function Login() {
   const navigate = useNavigate();
@@ -27,9 +28,10 @@ function Login() {
       const data = await loginAPI(credentails);
 
       localStorage.setItem("token", data.token);
+      toast.success("Login Successfully"); // toast success
       navigate("/");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message); // toast error
     }
     setLoading(false) ; //STOP spinner
   };
