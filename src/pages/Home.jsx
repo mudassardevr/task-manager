@@ -77,7 +77,7 @@ function Home() {
 
   return (
     <>
-      <main className="max-w-xl mx-auto p-4">
+      <main className="max-w-xl mx-auto bg-white rounded-xl p-4 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 mt-5 pb-10">
         <section>
           {/* title */}
           <h1 className="text-xl font-bold mb-4 text-gray-600">Your Task</h1>
@@ -113,6 +113,12 @@ function Home() {
             {loading ? (
               <div className="flex justify-center py-10">
                 <div className="w-6 h-6 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            ) : tasks.length === 0 ? (
+              /* EMPTY STATE */
+              <div className="text-center py-10 text-slate-400">
+                <p className="text-lg font-semibold">Empty Tasks </p>
+                <p className="text-sm">Start by adding a new task </p>
               </div>
             ) : (
               <ul className="flex flex-col gap-4">
