@@ -11,6 +11,8 @@ function Register() {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false); // LOADING spiner
+
   const onChange = (e) => {
     setCrendetails({
       ...credentails,
@@ -21,6 +23,7 @@ function Register() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    setLoading(true); // START spinner
     try {
       const data = await registerAPI(credentails);
       localStorage.setItem("token", data.token);
@@ -28,6 +31,8 @@ function Register() {
     } catch (error) {
       alert(error.message);
     }
+
+    setLoading(false); // STOP spinner
   };
   return (
     <>
@@ -62,9 +67,36 @@ function Register() {
           />
           <button
             type="submit"
-            className="bg-indigo-500 shadow-lg shadow-indigo-500/50 px-4 rounded-full text-white font-semibold w-full p-2"
+            disabled={loading}
+            className="bg-indigo-500 shadow-lg shadow-indigo-500/50 px-4 rounded-full text-white font-semibold w-full p-2 flex justify-center items-center gap-2"
           >
-            Log IN
+            {loading &&(
+              <>
+                <svg
+                  className="animate-spin h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="white"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="white"
+                    d="M4 12a8 8 0 018-8v8H4z"
+                  />
+                </svg>
+              </>
+            )}
+            <span className="block text-center">
+              {loading ? "Creating Account..." : "Create Acount"}
+            </span>
+
           </button>
 
           <p className="text-xs text-center mt-4 text-gray-200">
