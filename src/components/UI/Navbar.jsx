@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useRef , useEffect} from "react";
 //using logos
 import taskLogo from "../../assets/icons/tasklogo.svg";
 import taskText from "../../assets/icons/task.svg";
@@ -6,6 +6,24 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const menuRef = useRef(null); //
+
+  //Detect outside click
+  useEffect(() =>{
+    const handleClickOutSideMenu = (event) =>{
+      if(menuRef.current && !menuRef.current.contains(event.target)){
+        setIsOpen(false) // menu close
+      }
+    }
+
+     document.addEventListener("mousedown" , handleClickOutSideMenu);
+
+      return () =>{
+        document.removeEventListener("mousedown" , handleClickOutSideMenu);
+      }
+
+  },[])
 
   // logout system
   const navigate = useNavigate();
@@ -26,9 +44,10 @@ function Navbar() {
         </div>
 
         {/* hambargur  */}
+        <div ref={menuRef} className="md:hidden">
         <button
           onClick={() => {
-            setIsOpen(!isOpen);
+            setIsOpen(!isOpen)
           }}
           className="flex flex-col justify-center items-center w-10 h-10 md:hidden"
         >
@@ -44,6 +63,7 @@ function Navbar() {
             className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${isOpen ? "-rotate-45 -translate-y-1" : "translate-y-1"}`}
           />
         </button>
+        </div>
 
         {/* desktop menu */}
 
