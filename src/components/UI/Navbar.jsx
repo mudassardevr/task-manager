@@ -63,6 +63,78 @@ function Navbar() {
             className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${isOpen ? "-rotate-45 -translate-y-1" : "translate-y-1"}`}
           />
         </button>
+
+        {/* mobile menu */}
+        <div
+          className={`md:hidden absolute top-full left-0 w-full overflow-hidden shadow-xl transition-all origin-top ${isOpen ? "opacity-100 translate-y-0 duration-500 ease-out" : "opacity-0 -translate-y-0.5 duration-200 ease-in pointer-events-none"} `}
+        >
+          <ul className="flex flex-col bg-gray-100 gap-2">
+            <li>
+              <Link
+                to="/"
+                onClick={() => {setIsOpen(false)}}
+                className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
+              >
+                Home
+              </Link>
+            </li>
+            <div className="border-b border-gray-300 mx-4"></div>
+            {!token ? (
+              <>
+                <li>
+                  <Link
+                    to="/login"
+                     onClick={() => {setIsOpen(false)}}
+                    className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
+                  >
+                    Login
+                  </Link>
+                </li>
+                <div className="border-b border-gray-300 mx-4"></div>
+                <li>
+                  <Link
+                    to="/signup"
+                    
+                    className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
+                  >
+                    Sign Up
+                  </Link>
+                </li>
+                <div className="border-b border-gray-300 mx-4"></div>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to="/dashboard"
+                    className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+                <div className="border-b border-gray-300 mx-4"></div>
+                <li>
+                  <button
+                    onClick={handleLogOut}
+                    className="block px-4 py-2 font-bold w-full text-left hover:bg-white hover:text-blue-500 transition-colors"
+                  >
+                    Log Out
+                  </button>
+                </li>
+                <div className="border-b border-gray-300 mx-4"></div>
+              </>
+            )}
+
+            <li>
+              <Link
+                to="/about"
+                className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
+              >
+                About
+              </Link>
+            </li>
+          </ul>
+        </div>
         </div>
 
         {/* desktop menu */}
@@ -126,74 +198,7 @@ function Navbar() {
           </li>
         </ul>
 
-        {/* mobile menu */}
-        <div
-          className={`md:hidden absolute top-full left-0 w-full overflow-hidden shadow-xl transition-all origin-top ${isOpen ? "opacity-100 translate-y-0 duration-500 ease-out" : "opacity-0 -translate-y-0.5 duration-200 ease-in pointer-events-none"} `}
-        >
-          <ul className="flex flex-col bg-gray-100 gap-2">
-            <li>
-              <Link
-                to="/"
-                className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
-              >
-                Home
-              </Link>
-            </li>
-            <div className="border-b border-gray-300 mx-4"></div>
-            {!token ? (
-              <>
-                <li>
-                  <Link
-                    to="/login"
-                    className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
-                  >
-                    Login
-                  </Link>
-                </li>
-                <div className="border-b border-gray-300 mx-4"></div>
-                <li>
-                  <Link
-                    to="/signup"
-                    className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
-                  >
-                    Sign Up
-                  </Link>
-                </li>
-                <div className="border-b border-gray-300 mx-4"></div>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link
-                    to="/dashboard"
-                    className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
-                  >
-                    Dashboard
-                  </Link>
-                </li>
-                <div className="border-b border-gray-300 mx-4"></div>
-                <li>
-                  <button
-                    onClick={handleLogOut}
-                    className="block px-4 py-2 font-bold w-full text-left hover:bg-white hover:text-blue-500 transition-colors"
-                  >
-                    Log Out
-                  </button>
-                </li>
-                <div className="border-b border-gray-300 mx-4"></div>
-              </>
-            )}
-
-            <li>
-              <Link
-                to="/about"
-                className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
-              >
-                About
-              </Link>
-            </li>
-          </ul>
-        </div>
+        
       </nav>
     </>
   );
