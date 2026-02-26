@@ -94,7 +94,7 @@ function Navbar() {
                 <li>
                   <Link
                     to="/signup"
-                    
+                    onClick={() => {setIsOpen(false)}}
                     className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
                   >
                     Sign Up
@@ -128,6 +128,7 @@ function Navbar() {
             <li>
               <Link
                 to="/about"
+                onClick={() => {setIsOpen(false)}}
                 className="block px-4 py-2 font-bold cursor-pointer hover:bg-white hover:text-blue-500 transition-colors active:text-blue-500"
               >
                 About
