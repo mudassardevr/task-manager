@@ -39,7 +39,7 @@ const About = () => {
         <p className="text-gray-600">
           The goal of Task Manager is to provide a lightweight, fast, and
           intuitive experience that helps users stay productive without
-          unnecessary complexity.
+          unnecessary complexity. 
         </p>
 
       </div>
